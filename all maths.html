@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="math.css">
+</head>
+<body>
+    <div class="container">
+        <div class="Calculator ">
+         <form>
+             <div class="display">
+                 <input type="text" name="display">
+             </div>
+             <div>
+                <input type="button" value="AC" onclick="display.value =''">
+                <input type="button" value="DE"  onclick="display.value = display.value.toString().slice(0,-1)" >
+                <input type="button" value="." onclick="display.value +='.'">
+                <input type="button" value="÷" onclick="display.value +='/'">        
+            </div>
+             <div>
+                 <input type="button" value="(" onclick ="display.value +='('">
+                 <input type="button" value=")"  onclick="display.value += ')'" >
+                 <input type="button" value="[" onclick="display.value +='['">
+                 <input type="button" value="]" onclick="display.value +=']'">        
+             </div>
+             <div>
+                <input type="button" value="±" onclick ="display.value +='±'">
+                <input type="button" value="∓"  onclick="display.value +='∓'" >
+                <input type="button" value="√" onclick="display.value +='√'">
+                <input type="button" value="∛" onclick="display.value +='∛'">        
+            </div>
+            <div>
+                <input type="button" value="∓"  onclick="display.value +='∓'" >
+                <input type="button" value="√" onclick="display.value +='√'">
+                <input type="button" value="∛" onclick="display.value +='∛'">        
+            </div>
+            <div>
+                <input type="button" value="∜" onclick="display.value +='∜'">
+                <input type="button" value="^" onclick="display.value +='^'">
+                <input type="button" value="%" onclick="display.value +='%'">
+                <input type="button" value="mod" onclick="display.value +='mod'">
+               </div>
+             <div>
+                <input type="button" value="7" onclick="display.value +='7'">
+                 <input type="button" value="8" onclick="display.value +='8'">
+                 <input type="button" value="9" onclick="display.value +='9'">
+                 <input type="button" value="×" onclick="display.value +='*'">
+             </div>
+            
+             <div>
+                 <input type="button" value="4" onclick="display.value +='4'">
+                 <input type="button" value="5" onclick="display.value +='5'">
+                 <input type="button" value="6" onclick="display.value +='6'">
+                 <input type="button" value="-" onclick="display.value +='-'">            
+             </div>
+             <div>
+                 <input type="button" value="1" onclick="display.value +='1'">
+                 <input type="button" value="2" onclick="display.value +='2'">
+                 <input type="button" value="3" onclick="display.value +='3'">
+                 <input type="button" value="+" onclick="display.value +='+'">        
+             </div>
+             <div>
+                 <input type="button" value="00" onclick="display.value +='00'">
+                 <input type="button" value="0" onclick="display.value +='0'">
+                 <!--- <input type="button" value="=" onclick="display.value = eval(display.value)" class="equal"> ---->   
+                 <input type="button" value="=" onclick="calculation()" class="equal">    
+             </div>
+         </form>
+         <div class="vlac">
+            <button style="background-color: green;"><a href="index.html">to go back</a></button>
+        </div>
+</body>
+<script>
+    function calculation(){
+       var input= document.querySelector('input[name=display]');
+
+       if(input.value.includes('±')){
+        var result = `${eval(input.value.replace('±','+'))} or ${eval(input.value.replace('±','-'))}`;
+        input.value = result;
+       }
+       else if(input.value.includes('∓')){
+        var result = `${eval(input.value.replace('∓','-'))} or ${eval(input.value.replace('∓','+'))}`;
+        input.value = result;
+       }
+       else if(input.value.includes('√')){
+        var result = Math.sqrt(input.value.replace('√',''));
+        input.value = result;
+       }
+        else if(input.value.includes('∛')){
+        var result = Math.cbrt(input.value.replace('∛',''));
+        input.value = result;
+       }
+       else if(input.value.includes('∜')){
+        var result  = Math.pow(input.value.replace('∜',''),1/4);
+        input.value = result;
+       }
+       else if(input.value.includes('^')){
+        var numb1 =input.value.split('^')[0];
+        var numb2 =input.value.split('^')[1];
+        var result  = Math.pow(numb1, numb2);
+        input.value = result;
+       }
+       else if(input.value.includes('%')){
+        var numb1 =input.value.split('%')[0];
+        var numb2 =input.value.split('%')[1];
+        var result  = (numb1/100)*numb2;
+        input.value = result;
+       }
+       else if(input.value.includes('mod')){
+        var numb1 =input.value.split('mod')[0];
+        var numb2 =input.value.split('mod')[1];
+        var result  = (numb1%numb2);
+        input.value = result;
+       }
+       else if(input.value.includes('half')){
+        let result = number / 2;
+        input.value = result;
+       }    
+       else{
+        input.value = eval(input.value);
+       }
+    }
+    </script>
+</body>
+</html>
